@@ -1,19 +1,29 @@
 # Boston House Price Prediction
 
-## Problem Statement
+## Project Goal
 
-This project is about creating a model that will help users predict the house prices in Boston. For this model, we will check the effect of 4 different methods of handling missing values to see it's effect on the model in order to choose the best model based on how the missing values were handled.
+The focus of the project is about checking the effect of 4 different methods of handling missing values to see how it affects model building and evaluaton.
 
-The model that fared the best will then be passed to production for future prediction.
+## Project Desciption
 
-The dataset was split into two, `train` (which was further split in two, `train` and `validation`) and `test`.
+Dataset will be prepared, cleaned and Exploratory Data Analysis(EDA) carried out in a file called, `data_preprocessing.ipynb`. From this file, 4 new datasets will be created after applying the different 4 different methodology of handling missing values. The generated datasets will then be used to build 4 models respectively. These models will be evaluated and based on the result of the evaluations, the best model will be selected. The selected model will the be passed to production(deployed).
 
-Filling the missing values
+The dataset was split into two, `train` and `test`. `train` would have been split further in two, `train` and `validation` but the dataset had just `506` observations.
+
+#### Chosen Methodology for Handling Missing values
 
 - with 0s
 - with the mean of the column
 - by deleting the rows with missing data
 - by deleting the columns with missing data
+
+#### The Evaluation Metrics for all Four Include:
+
+- mean_absolute_error
+- mean_squared_error
+- mean_squared_error_with_np
+- r2_score
+- adjusted_r_score
 
 ## Dataset Description
 
@@ -53,7 +63,8 @@ The dataset used for this project is from the housing market in Boston. The data
 1. VSCODE
 2. Jupyter Notebook
 3. Git/Github
-4. Render for deployment
+4. Docker
+5. Render for deployment
 
 ## Notebook Links
 
@@ -98,11 +109,108 @@ To replicate the environment, run the following commands:
 - pip freeze > requirements.txt
 - pip install -r requirements.txt -->
 
+## Summary of Findings
+
+After creating models and evaluating them, the model whose missing values were replaced zeros faired better than the other models. Below is a table that summarizes the result of the evaluation for each model:
+
+- Model built with the deleted columns with missing values(dcmv)
+- Model built with the deleted rows with missing values(drmv)
+- Model built with the replacing the missing values with the mean of the column they belong to(rmvmm)
+- Model built with the replacing the missing values with 0.00(rmz)
+
+<table>
+ <tr>
+    <th>Model Name</th>
+    <th>mean_absolute_error</th>
+    <th>mean_squared_error</th>
+    <th>mean_squared_error_with_np</th>
+    <th>r2_score</th>
+    <th>adjusted_r_score</th>
+ </tr>
+ <tr>
+    <td>dcmv</td>
+    <td>3.6454950179298584</td>
+    <td>24.538442517765194</td>
+    <td>4.9536292269168865</td>
+    <td>0.7322723273710499</td>
+    <td>0.7211939409174382</td>
+ </tr>
+ <tr>
+    <td>drmv</td>
+    <td>3.501122961969476</td>
+    <td>22.85770809860834</td>
+    <td>4.780973551339553</td>
+    <td>0.7147470620507681</td>
+    <td>0.6824542766225532</td>
+ </tr>
+ <tr>
+    <td>rmvmm</td>
+    <td>3.5384305807172383</td>
+    <td>22.074466560695623</td>
+    <td>4.698347215851083</td>
+    <td>0.7591556370155939</td>
+    <td>0.7383633179090264</td>
+ </tr>
+ <tr>
+    <td>rmz</td>
+    <td>3.392786788751625</td>
+    <td>21.071458190983513</td>
+    <td>4.590365801434948</td>
+    <td>0.7700990005259702</td>
+    <td>0.7502514322260541</td>
+ </tr>
+</table>
+
+Below is the table to summarize the prediction done with each model................START HERE NEXT
+
+<table>
+ <tr>
+    <th>Model Name</th>
+    <th>mean_absolute_error</th>
+    <th>mean_squared_error</th>
+    <th>mean_squared_error_with_np</th>
+    <th>r2_score</th>
+    <th>adjusted_r_score</th>
+ </tr>
+ <tr>
+    <td>dcmv</td>
+    <td>3.6454950179298584</td>
+    <td>24.538442517765194</td>
+    <td>4.9536292269168865</td>
+    <td>0.7322723273710499</td>
+    <td>0.7211939409174382</td>
+ </tr>
+ <tr>
+    <td>drmv</td>
+    <td>3.501122961969476</td>
+    <td>22.85770809860834</td>
+    <td>4.780973551339553</td>
+    <td>0.7147470620507681</td>
+    <td>0.6824542766225532</td>
+ </tr>
+ <tr>
+    <td>rmvmm</td>
+    <td>3.5384305807172383</td>
+    <td>22.074466560695623</td>
+    <td>4.698347215851083</td>
+    <td>0.7591556370155939</td>
+    <td>0.7383633179090264</td>
+ </tr>
+ <tr>
+    <td>rmz</td>
+    <td>3.392786788751625</td>
+    <td>21.071458190983513</td>
+    <td>4.590365801434948</td>
+    <td>0.7700990005259702</td>
+    <td>0.7502514322260541</td>
+ </tr>
+</table>
+
 ## Conclusion
 
-I observed that it is wise to check the correlation and coefficient before deciding to delete the missing values. In this case, age was an important factor but it had to be deleted because it had missing values. I deleted column-wise and row-wise.
+I observed that it is wise to check the correlation and coefficient before deciding to delete the missing values. In this case, age was an important factor but it had to be deleted while working on the model that used the dataset where the columns with missing values had to be deleted.
 
-The model where the missing values were replaced with the mean fared better than the rest followed by ......
+After comparing the results from the evaluation metrics and predictions with different values, it was observed that the model where the missing values were replaced with zeros fared better than the rest followed by ......
 
 The first and ninth data point was to test the output of the prediction values
 
@@ -112,3 +220,7 @@ The first and ninth data point was to test the output of the prediction values
 - Model built with the replacing the missing values with 0.00
 
 The evaluation metrics for all four include
+
+## Challenges
+
+The greatest challenge was not having `pickle` or its variant `dill` work for the project, it kept returning that `pickle` was not found. I finally went for the `joblib` which comes installed with the `scikit-learn` library.
