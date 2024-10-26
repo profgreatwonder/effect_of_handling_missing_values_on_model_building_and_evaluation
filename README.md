@@ -1,4 +1,4 @@
-# Boston House Price Prediction
+# The Effect of 4 Different Methods of Handling Missing Values on Model Building and Evaluation
 
 ## Project Goal
 
