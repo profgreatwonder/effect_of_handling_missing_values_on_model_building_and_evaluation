@@ -105,6 +105,26 @@ To replicate the environment, run the following commands:
 
       conda create --name <env_name> --file environment.txt
 
+#### Note
+
+In case you run into issues replicating the project due to how old it is (this works for any old project), After cloning, follow the steps provided:
+
+1.  There is a need to generate a new requirement.yml or requirement.txt file which is named req.yml in my case:
+
+         conda env export --no-builds > req.yml
+
+2.  The generated yml file should then be edited at the top and the bottom
+
+    - at the top, just before channels, a name has to be provided for enviroment. In my case, it is:
+
+          name: missing_value_evaluation
+
+    - at the bottom, the last line after dependencies, the prefix also has to updated with the filepath to your project which you can get from running the _pwd_ command.
+
+3.  finally, create an environment from the edited yml file:
+
+         conda env create -f req.yml
+
 <!-- ##### for .txt with pip
 - pip freeze > requirements.txt
 - pip install -r requirements.txt -->
